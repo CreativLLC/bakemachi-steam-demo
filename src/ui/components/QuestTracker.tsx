@@ -245,7 +245,7 @@ export function QuestTracker() {
         panelOrigin={PANELS.rounded}
         style={{
           position: 'absolute',
-          top: isMobile ? 0 : 12,
+          top: isMobile ? 80 : 12,
           right: isMobile ? 0 : 12,
           zIndex: 50,
           maxWidth: isMobile ? 180 : 220,

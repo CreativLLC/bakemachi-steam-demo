@@ -9,12 +9,16 @@ import { GamepadIcon } from './GamepadIcon';
 const widthSubscribe = (cb: () => void) => { window.addEventListener('resize', cb); return () => window.removeEventListener('resize', cb); };
 const getIsNarrow = () => window.innerWidth < 500;
 
+const mobileSubscribe = (cb: () => void) => { window.addEventListener('resize', cb); return () => window.removeEventListener('resize', cb); };
+const getIsMobile = () => window.innerWidth <= 768;
+
 export function MenuBar() {
   const currentScene = useGameStore((s) => s.currentScene);
   const isDialogueActive = useUIStore((s) => s.isDialogueActive);
   const activeMatchingGame = useUIStore((s) => s.activeMatchingGame);
   const activeMenu = useUIStore((s) => s.activeMenu);
   const isNarrow = useSyncExternalStore(widthSubscribe, getIsNarrow);
+  const isMobile = useSyncExternalStore(mobileSubscribe, getIsMobile);
   const inputMode = useUIStore((s) => s.inputMode);
 
   // Only show in overworld, hide during dialogue/matching/menu overlays
@@ -24,8 +28,9 @@ export function MenuBar() {
   return (
     <div style={{
       position: 'absolute',
-      bottom: isNarrow ? 4 : 12,
-      right: isNarrow ? 4 : 12,
+      ...(isMobile
+        ? { top: 4, right: 4 }
+        : { bottom: 12, right: 12 }),
       zIndex: 50,
       display: 'flex',
       flexDirection: 'row',
