@@ -37,7 +37,7 @@ function directionToDelta(dir: Direction): { dx: number; dy: number } {
   }
 }
 
-export default function VirtualDPad() {
+export function VirtualDPad() {
   const inputMode = useUIStore((s) => s.inputMode);
   const isDialogueActive = useUIStore((s) => s.isDialogueActive);
   const activeMenu = useUIStore((s) => s.activeMenu);
