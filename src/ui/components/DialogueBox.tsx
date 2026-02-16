@@ -91,7 +91,7 @@ function findBestItem(
 }
 
 export function DialogueBox() {
-  const { activeDialogue, currentLineIndex, isDialogueActive, advanceLine, dialogueFocusActive } = useUIStore();
+  const { activeDialogue, currentLineIndex, isDialogueActive, advanceLine } = useUIStore();
   const setQuestState = useGameStore((s) => s.setQuestState);
   const [translationState, setTranslationState] = useState<'hidden' | 'confirming' | 'shown'>('hidden');
   const [quizFeedback, setQuizFeedback] = useState<string | null>(null);
@@ -100,20 +100,6 @@ export function DialogueBox() {
   const feedbackTimerRef = useRef<ReturnType<typeof setTimeout>>();
   const inputMode = useUIStore((s) => s.inputMode);
   const isMobile = useSyncExternalStore(mobileSubscribe, getIsMobile);
-
-  // Track word popup state to block click-through after popup closes
-  const wordPopup = useUIStore((s) => s.wordPopup);
-  const wordPopupRecentRef = useRef(false);
-
-  useEffect(() => {
-    if (wordPopup) {
-      wordPopupRecentRef.current = true;
-    } else if (wordPopupRecentRef.current) {
-      // Popup just closed — keep flag true briefly to block click-through
-      const timer = setTimeout(() => { wordPopupRecentRef.current = false; }, 300);
-      return () => clearTimeout(timer);
-    }
-  }, [wordPopup]);
 
   // --- Unified focus state ---
   const [focusedItemId, setFocusedItemId] = useState<string | null>(null);
@@ -355,26 +341,7 @@ export function DialogueBox() {
     }
   };
 
-  const handleDialogueTap = (e: React.MouseEvent<HTMLDivElement>) => {
-    const target = e.target as HTMLElement;
-    // Don't advance if clicking a button or interactive word element
-    if (target.closest('button')) return;
-    if (target.closest('[data-word]')) return;
-    // Don't advance if word popup is currently showing or was recently closed
-    if (useUIStore.getState().wordPopup) return;
-    if (wordPopupRecentRef.current) return;
-    // Don't advance if gamepad focus is active (user is navigating words/choices)
-    if (dialogueFocusActive) return;
-    // Don't advance during quiz feedback
-    if (quizFeedback) return;
-    // Don't advance if choices are showing on the last line
-    if (activeDialogue.choices && activeDialogue.choices.length > 0 &&
-        currentLineIndex >= activeDialogue.lines.length - 1) return;
-    advanceLine();
-  };
-
   return (
-    <div onClick={handleDialogueTap} style={{ cursor: 'pointer' }}>
     <PixelPanel
       panelOrigin={PANELS.rounded}
       borderWidth={isMobile ? 32 : 52}
@@ -679,38 +646,76 @@ export function DialogueBox() {
         )}
       </div>
 
-      {/* Advance hint — absolute top-right */}
-      <div style={{
-        position: 'absolute',
-        top: isMobile ? 4 : 8,
-        right: isMobile ? 6 : 12,
-        fontSize: isMobile ? 10 : 11,
-        color: UI.textFaded,
-        fontFamily: UI_FONT,
-        display: 'flex',
-        alignItems: 'center',
-        gap: 2,
-        opacity: 0.7,
-        pointerEvents: 'none',
-      }}>
-        {showChoices && quizFeedback ? null : showChoices ? (
-          inputMode === 'gamepad'
-            ? <><GamepadIcon button="a" size={14} /></>
-            : null
+      {/* Advance hint / tap-to-continue */}
+      {showChoices && quizFeedback ? null : showChoices ? (
+        inputMode === 'gamepad' ? (
+          <div style={{
+            position: 'absolute',
+            top: isMobile ? 4 : 8,
+            right: isMobile ? 6 : 12,
+            fontSize: isMobile ? 10 : 11,
+            color: UI.textFaded,
+            fontFamily: UI_FONT,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 2,
+            opacity: 0.7,
+            pointerEvents: 'none',
+          }}>
+            <GamepadIcon button="a" size={14} />
+          </div>
+        ) : null
+      ) : (
+        inputMode === 'touch' ? (
+          <div
+            onClick={(e) => {
+              e.stopPropagation();
+              advanceLine();
+            }}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 6,
+              padding: isMobile ? '6px 0 2px' : '8px 0 4px',
+              borderTop: `1px solid ${UI.textFaded}30`,
+              cursor: 'pointer',
+              opacity: 0.7,
+              marginTop: 2,
+            }}
+          >
+            <span style={{
+              fontSize: isMobile ? 11 : 12,
+              color: UI.textFaded,
+              fontFamily: UI_FONT,
+            }}>
+              Tap to continue
+            </span>
+            <img src="/assets/ui/32x32/chevron-right.png" alt=">" style={{ height: isMobile ? 10 : 12, imageRendering: 'pixelated', opacity: 0.6 }} />
+          </div>
         ) : (
-          <>
+          <div style={{
+            position: 'absolute',
+            top: isMobile ? 4 : 8,
+            right: isMobile ? 6 : 12,
+            fontSize: isMobile ? 10 : 11,
+            color: UI.textFaded,
+            fontFamily: UI_FONT,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 2,
+            opacity: 0.7,
+            pointerEvents: 'none',
+          }}>
             {inputMode === 'gamepad'
               ? <GamepadIcon button="a" size={14} />
-              : inputMode === 'touch'
-                ? <span>tap</span>
-                : <span>[Space]</span>
+              : <span>[Space]</span>
             }
             <img src="/assets/ui/32x32/chevron-right.png" alt=">" style={{ height: 12, imageRendering: 'pixelated' }} />
-          </>
-        )}
-      </div>
+          </div>
+        )
+      )}
     </PixelPanel>
-    </div>
   );
 }
 
