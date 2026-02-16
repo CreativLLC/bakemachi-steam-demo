@@ -16,8 +16,10 @@ import { MenuBar } from './MenuBar';
 import { QuestTracker } from './QuestTracker';
 import { ChapterTitle } from './ChapterTitle';
 import { GameMenu } from './GameMenu';
+import { VirtualDPad } from './VirtualDPad';
 import { useCombatStore } from '../../store/combatStore';
 import { useGameStore } from '../../store/gameStore';
+import { useUIStore } from '../../store/uiStore';
 
 export function GameContainer() {
   const gameRef = useRef<Phaser.Game | null>(null);
@@ -37,6 +39,15 @@ export function GameContainer() {
         gameRef.current = null;
       }
     };
+  }, []);
+
+  // Auto-detect touch device on mount
+  useEffect(() => {
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const hasCoarsePrimary = window.matchMedia('(pointer: coarse)').matches;
+    if (isTouchDevice && hasCoarsePrimary) {
+      useUIStore.getState().setInputMode('touch');
+    }
   }, []);
 
   return (
@@ -73,6 +84,7 @@ export function GameContainer() {
         <ReadingGame />
         <QuestTracker />
         <ChapterTitle />
+        <VirtualDPad />
         <MenuBar />
         <GameMenu />
         <CombatScreen />

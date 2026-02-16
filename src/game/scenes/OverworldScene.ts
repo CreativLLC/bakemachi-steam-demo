@@ -1414,6 +1414,11 @@ export class OverworldScene extends Phaser.Scene {
       confirmPressed = true;
       // 'confirm' already emitted above before the menu/matching guard
     }
+    // Touch confirm (one-shot — clear immediately)
+    if (useUIStore.getState().touchConfirmPressed) {
+      confirmPressed = true;
+      useUIStore.getState().clearTouchConfirm();
+    }
 
     if (confirmPressed) {
       if (isDialogueActive) {
@@ -1466,6 +1471,12 @@ export class OverworldScene extends Phaser.Scene {
       if (pad.buttons[13]?.pressed) dy += 1;
       if (pad.buttons[14]?.pressed) dx -= 1;
       if (pad.buttons[15]?.pressed) dx += 1;
+    }
+    // Touch d-pad input
+    const touchDir = useUIStore.getState().touchDirection;
+    if (touchDir.dx !== 0 || touchDir.dy !== 0) {
+      dx += touchDir.dx;
+      dy += touchDir.dy;
     }
     // Clamp
     dx = Math.max(-1, Math.min(1, dx));

@@ -41,6 +41,10 @@ interface UIState {
   // Dialogue focus — true when React has a focusable item selected (blocks OverworldScene advanceLine)
   dialogueFocusActive: boolean;
 
+  // Touch input
+  touchDirection: { dx: number; dy: number };
+  touchConfirmPressed: boolean;
+
   // Chapter title card
   chapterTitle: { chapter: string; subtitle: string } | null;
 
@@ -73,6 +77,9 @@ interface UIState {
   closeMenu: () => void;
   setInputMode: (mode: 'keyboard' | 'gamepad' | 'touch') => void;
   setDialogueFocusActive: (active: boolean) => void;
+  setTouchDirection: (dx: number, dy: number) => void;
+  pressTouchConfirm: () => void;
+  clearTouchConfirm: () => void;
   setShowRomaji: (show: boolean) => void;
   setDifficulty: (d: 'off' | 'easy' | 'medium' | 'hard') => void;
   showChapterTitle: (chapter: string, subtitle: string) => void;
@@ -96,6 +103,8 @@ export const useUIStore = create<UIState>((set, get) => ({
   activeMenu: null,
   inputMode: 'keyboard',
   dialogueFocusActive: false,
+  touchDirection: { dx: 0, dy: 0 },
+  touchConfirmPressed: false,
   showRomaji: true,
   difficulty: 'medium',
 
@@ -200,6 +209,9 @@ export const useUIStore = create<UIState>((set, get) => ({
   closeMenu: () => set({ activeMenu: null }),
   setInputMode: (mode) => set({ inputMode: mode }),
   setDialogueFocusActive: (active) => set({ dialogueFocusActive: active }),
+  setTouchDirection: (dx, dy) => set({ touchDirection: { dx, dy } }),
+  pressTouchConfirm: () => set({ touchConfirmPressed: true }),
+  clearTouchConfirm: () => set({ touchConfirmPressed: false }),
   setShowRomaji: (show) => set({ showRomaji: show }),
   setDifficulty: (d) => set({ difficulty: d }),
   showChapterTitle: (chapter, subtitle) => set({ chapterTitle: { chapter, subtitle } }),

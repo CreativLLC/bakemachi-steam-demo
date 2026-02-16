@@ -91,7 +91,7 @@ function findBestItem(
 }
 
 export function DialogueBox() {
-  const { activeDialogue, currentLineIndex, isDialogueActive } = useUIStore();
+  const { activeDialogue, currentLineIndex, isDialogueActive, advanceLine, dialogueFocusActive } = useUIStore();
   const setQuestState = useGameStore((s) => s.setQuestState);
   const [translationState, setTranslationState] = useState<'hidden' | 'confirming' | 'shown'>('hidden');
   const [quizFeedback, setQuizFeedback] = useState<string | null>(null);
@@ -341,7 +341,19 @@ export function DialogueBox() {
     }
   };
 
+  const handleDialogueTap = (e: React.MouseEvent<HTMLDivElement>) => {
+    // Don't advance if clicking a button or interactive element
+    if ((e.target as HTMLElement).closest('button')) return;
+    // Don't advance if gamepad focus is active (user is navigating words/choices)
+    if (dialogueFocusActive) return;
+    // Don't advance if choices are showing on the last line
+    if (activeDialogue.choices && activeDialogue.choices.length > 0 &&
+        currentLineIndex >= activeDialogue.lines.length - 1) return;
+    advanceLine();
+  };
+
   return (
+    <div onClick={handleDialogueTap} style={{ cursor: 'pointer' }}>
     <PixelPanel
       panelOrigin={PANELS.rounded}
       borderWidth={isMobile ? 32 : 52}
@@ -677,6 +689,7 @@ export function DialogueBox() {
         )}
       </div>
     </PixelPanel>
+    </div>
   );
 }
 
