@@ -42,6 +42,13 @@ export function WordPopup() {
   const progress = useVocabularyStore.getState().getProgress(word.id);
   const jlptColor = JLPT_COLORS[word.jlptLevel] ?? '#888';
 
+  // Position popup above the word if there's room, otherwise below
+  const popupHeight = 200;
+  const fitsAbove = y - popupHeight > 8;
+  const topPosition = fitsAbove
+    ? Math.max(y - popupHeight, 8)
+    : Math.min(y + 30, window.innerHeight - popupHeight - 8);
+
   return (
     <div ref={popupRef}>
       <PixelPanel
@@ -49,7 +56,7 @@ export function WordPopup() {
         style={{
           position: 'fixed',
           left: Math.min(Math.max(x - 140, 8), window.innerWidth - 288),
-          top: Math.max(y - 200, 8),
+          top: topPosition,
           width: 280,
           padding: '14px 16px',
           zIndex: 200,

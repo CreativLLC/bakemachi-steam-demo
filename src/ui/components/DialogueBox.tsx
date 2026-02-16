@@ -101,6 +101,20 @@ export function DialogueBox() {
   const inputMode = useUIStore((s) => s.inputMode);
   const isMobile = useSyncExternalStore(mobileSubscribe, getIsMobile);
 
+  // Track word popup state to block click-through after popup closes
+  const wordPopup = useUIStore((s) => s.wordPopup);
+  const wordPopupRecentRef = useRef(false);
+
+  useEffect(() => {
+    if (wordPopup) {
+      wordPopupRecentRef.current = true;
+    } else if (wordPopupRecentRef.current) {
+      // Popup just closed — keep flag true briefly to block click-through
+      const timer = setTimeout(() => { wordPopupRecentRef.current = false; }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [wordPopup]);
+
   // --- Unified focus state ---
   const [focusedItemId, setFocusedItemId] = useState<string | null>(null);
   const prevFocusRef = useRef<string | null>(null);
@@ -342,10 +356,17 @@ export function DialogueBox() {
   };
 
   const handleDialogueTap = (e: React.MouseEvent<HTMLDivElement>) => {
-    // Don't advance if clicking a button or interactive element
-    if ((e.target as HTMLElement).closest('button')) return;
+    const target = e.target as HTMLElement;
+    // Don't advance if clicking a button or interactive word element
+    if (target.closest('button')) return;
+    if (target.closest('[data-word]')) return;
+    // Don't advance if word popup is currently showing or was recently closed
+    if (useUIStore.getState().wordPopup) return;
+    if (wordPopupRecentRef.current) return;
     // Don't advance if gamepad focus is active (user is navigating words/choices)
     if (dialogueFocusActive) return;
+    // Don't advance during quiz feedback
+    if (quizFeedback) return;
     // Don't advance if choices are showing on the last line
     if (activeDialogue.choices && activeDialogue.choices.length > 0 &&
         currentLineIndex >= activeDialogue.lines.length - 1) return;
@@ -727,6 +748,7 @@ function SpeakerNameplate({ name, wordId }: { name: string; wordId: string }) {
 
   return (
     <span
+      data-word="true"
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
       onPointerLeave={handlePointerUp}
@@ -828,6 +850,7 @@ function WordSegment({ segment, isFocused, elRef }: { segment: TextSegment; isFo
   return (
     <span
       ref={elRef}
+      data-word="true"
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
       onPointerLeave={handlePointerLeave}
