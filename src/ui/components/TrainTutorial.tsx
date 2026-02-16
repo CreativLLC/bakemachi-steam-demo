@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useCallback, useEffect, useRef, useSyncExternalStore } from 'react';
 import { useGameStore } from '../../store/gameStore';
 import { useUIStore } from '../../store/uiStore';
 import { useVocabularyStore } from '../../store/vocabularyStore';
@@ -24,6 +24,9 @@ const TUTORIAL_WORDS = [
   { id: 'w_sayounara', kana: 'さようなら', meaning: 'goodbye' },
 ] as const;
 
+const widthSubscribe = (cb: () => void) => { window.addEventListener('resize', cb); return () => window.removeEventListener('resize', cb); };
+const getIsNarrow = () => window.innerWidth < 500;
+
 type Phase = 'intro' | 'quiz' | 'done';
 
 function shuffleArray<T>(arr: T[]): T[] {
@@ -46,6 +49,7 @@ export function TrainTutorial() {
   const currentScene = useGameStore((s) => s.currentScene);
   const completeTutorial = useUIStore((s) => s.completeTutorial);
   const markEncountered = useVocabularyStore((s) => s.markEncountered);
+  const isNarrow = useSyncExternalStore(widthSubscribe, getIsNarrow);
 
   const [phase, setPhase] = useState<Phase>('intro');
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
@@ -171,9 +175,9 @@ export function TrainTutorial() {
       transition: 'opacity 0.8s ease',
     }}>
       <style>{FOCUS_PULSE_STYLES}</style>
-      <PixelPanel panelOrigin={PANELS.rounded} borderWidth={52} style={{
-        width: 'min(90%, 500px)',
-        padding: '32px 28px',
+      <PixelPanel panelOrigin={PANELS.rounded} borderWidth={isNarrow ? 28 : 52} style={{
+        width: isNarrow ? '98%' : 'min(90%, 500px)',
+        padding: isNarrow ? '16px 12px' : '32px 28px',
         opacity: contentOpacity,
         transition: 'opacity 0.3s ease',
       }}>

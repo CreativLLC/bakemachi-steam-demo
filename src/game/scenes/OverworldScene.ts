@@ -1709,13 +1709,15 @@ export class OverworldScene extends Phaser.Scene {
           }
         }
 
-        // If keys or gamepad are still held, immediately start next move (no 1-frame gap)
+        // If keys, gamepad, or touch d-pad are still held, immediately start next move (no 1-frame gap)
         const movePad = this.input.gamepad?.pad1 ?? null;
+        const moveTouchDir = useUIStore.getState().touchDirection;
         const anyInputHeld =
           this.cursors?.up.isDown || this.cursors?.down.isDown ||
           this.cursors?.left.isDown || this.cursors?.right.isDown ||
           this.wasd?.up.isDown || this.wasd?.down.isDown ||
           this.wasd?.left.isDown || this.wasd?.right.isDown ||
+          (moveTouchDir.dx !== 0 || moveTouchDir.dy !== 0) ||
           (movePad != null && (
             Math.abs(movePad.leftStick.x) > this.STICK_DEADZONE ||
             Math.abs(movePad.leftStick.y) > this.STICK_DEADZONE ||
