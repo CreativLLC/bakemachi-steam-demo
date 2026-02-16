@@ -1,0 +1,253 @@
+body/bodies/muscular/walk/brown.png
+	- Note: see details at https://opengameart.org/content/lpc-character-bases
+	- Licenses:
+		- CC-BY-SA 3.0
+		- GPL 3.0
+	- Authors:
+		- bluecarrot16
+		- JaidynReiman
+		- Evert
+		- TheraHedwig
+		- MuffinElZangano
+		- Durrani
+		- Sander Frenken (castelonia)
+		- Benjamin K. Smith (BenCreating)
+		- Eliza Wyatt (ElizaWy)
+		- dalonedrau
+		- Stephen Challener (Redshrike)
+	- Links:
+		- https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
+		- https://opengameart.org/content/lpc-barbarian-sprite-base
+		- https://opengameart.org/content/lpc-muscular-swing-animation
+		- https://opengameart.org/content/lpc-muscular-hurt-animation
+		- https://opengameart.org/content/lpc-jump-expanded
+		- https://opengameart.org/content/lpc-revised-character-basics
+		- https://opengameart.org/content/lpc-be-seated
+		- https://opengameart.org/content/lpc-jump-expanded
+		- https://opengameart.org/content/lpc-character-bases
+		- https://opengameart.org/content/lpc-male-jumping-animation-by-durrani
+
+head/heads/minotaur/male/walk/brown.png
+	- Note: original cow by daneeklu, combined with horns by Nila122 and adapted to minotaur by Evert
+	- Licenses:
+		- CC-BY-SA 3.0
+		- GPL 3.0
+	- Authors:
+		- Evert
+		- Nila122
+		- Daniel Eddeland (daneeklu)
+	- Links:
+		- https://opengameart.org/content/lpc-style-farm-animals
+		- https://opengameart.org/content/lpc-lizard-headgear
+		- https://opengameart.org/content/lpc-faun-and-minotaur
+
+head/faces/global/happy2/walk/brown.png
+	- Note: Original Bases by Redshrike, Alt Happy Expression by Laetissima and Pennomi, mapped to all frames by JaidynReiman
+	- Licenses:
+		- CC-BY-SA 3.0
+		- GPL 3.0
+	- Authors:
+		- JaidynReiman
+		- Thane Brimhall (pennomi)
+		- laetissima
+		- Stephen Challener (Redshrike)
+	- Links:
+		- https://opengameart.org/content/lpc-base-character-expressions
+		- https://opengameart.org/content/ulpc-expanded-expressions
+
+arms/gloves/male/walk/silver.png
+	- Note: metal gloves by wulax, recolors by bigbeargames, adapted to v3 bases by bluecarrot16, added to expanded animations by JaidynReiman
+	- Licenses:
+		- OGA-BY 3.0
+		- CC-BY-SA 3.0
+		- GPL 3.0
+	- Authors:
+		- Michael Whitlock (bigbeargames)
+		- Matthew Krohn (makrohn)
+		- Johannes Sjölund (wulax)
+		- bluecarrot16
+		- JaidynReiman
+	- Links:
+		- https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
+		- http://opengameart.org/content/lpc-clothing-updates
+
+feet/boots/basic/male/walk/copper.png
+	- Note: original by Nila122, edited for male and v3 bases by bluecarrot16, Jump/Sit/Emote/Run/Revised Combat by JaidynReiman
+	- Licenses:
+		- OGA-BY 3.0
+		- CC-BY-SA 3.0
+		- GPL 2.0
+		- GPL 3.0
+	- Authors:
+		- JaidynReiman
+		- bluecarrot16
+		- Nila122
+	- Links:
+		- https://opengameart.org/content/lpc-clothes-and-hair
+		- https://opengameart.org/content/lpc-expanded-socks-shoes
+
+head/wrinkles/walk/brown.png
+	- Licenses:
+		- CC0
+	- Authors:
+		- bluecarrot16
+	- Links:
+		- 
+
+shoulders/legion/male/walk/bronze.png
+	- Licenses:
+		- OGA-BY 3.0
+		- CC-BY-SA 3.0
+		- GPL 2.0
+		- GPL 3.0
+	- Authors:
+		- Nila122
+	- Links:
+		- https://opengameart.org/content/lpc-roman-armor
+
+body/wings/bat/lizard/adult/fg/walk/brown.png
+	- Note: Original by ElizaWy, added to most remaining frames by JaidynReiman
+	- Licenses:
+		- OGA-BY 3.0
+	- Authors:
+		- ElizaWy
+		- JaidynReiman
+	- Links:
+		- https://opengameart.org/content/lpc-wings-new-animations
+
+feet/socks/tabi/male/walk/green.png
+	- Licenses:
+		- OGA-BY 3.0+
+		- CC-BY 3.0+
+		- GPL 3.0
+	- Authors:
+		- JaidynReiman
+		- Stephen Challener (Redshrike)
+		- Johannes Sjölund (wulax)
+	- Links:
+		- https://opengameart.org/content/lpc-kimono-relm
+		- https://opengameart.org/content/lpc-expanded-socks-shoes
+
+hair/long_messy2/adult/walk/light_brown.png
+	- Note: (shura)
+	- Licenses:
+		- CC-BY-SA 3.0
+		- GPL 3.0
+	- Authors:
+		- Yamilian
+		- bluecarrot16
+	- Links:
+		- https://opengameart.org/content/lpc-heroine-2
+		- https://opengameart.org/content/lpc-hair
+
+beards/beard/medium/walk/light_brown.png
+	- Licenses:
+		- OGA-BY 3.0
+	- Authors:
+		- ElizaWy
+	- Links:
+		- https://github.com/ElizaWy/LPC/tree/main/Characters/Hair
+		- https://opengameart.org/content/lpc-expanded-sit-run-jump-more
+
+neck/tie/necktie/male/walk/forest.png
+	- Note: Originally by pennomi/laetissima/Makrohn, edited by bluecarrot16, animations and recolors by JaidynReiman
+	- Licenses:
+		- CC-BY-SA 3.0
+		- GPL 3.0
+	- Authors:
+		- JaidynReiman
+		- bluecarrot16
+		- Thane Brimhall (pennomi)
+		- laetissima
+		- Makrohn
+	- Links:
+		- https://opengameart.org/content/lpc-2-characters
+		- https://opengameart.org/content/lpc-gentleman
+
+facial/masks/plain/adult/walk/white.png
+	- Licenses:
+		- OGA-BY 3.0
+		- CC-BY-SA 3.0
+		- GPL 2.0
+		- GPL 3.0
+	- Authors:
+		- Nila122
+	- Links:
+		- https://opengameart.org/content/lpc-masks
+		- https://opengameart.org/content/lpc-expanded-hats-facial-helmets
+
+legs/skirts/legion/male/walk/yellow.png
+	- Note: original by Nila122 to legion, adapted to v3 bases by bluecarrot16
+	- Licenses:
+		- OGA-BY 3.0
+		- CC-BY-SA 3.0
+		- GPL 2.0
+		- GPL 3.0
+	- Authors:
+		- bluecarrot16
+		- Nila122
+	- Links:
+		- https://opengameart.org/content/lpc-roman-armor
+		- http://opengameart.org/content/lpc-clothing-updates
+
+body/wings/monarch/dots/fg/walk/white.png
+	- Note: In dedication to my grandmother, Sharon Rowe
+	- Licenses:
+		- OGA-BY 4.0
+		- CC-BY-SA 4.0
+	- Authors:
+		- The Foreman
+	- Links:
+		- https://opengameart.org/content/lpc-fairy-wings
+
+hair/extensions/bangs/xlong_curlyr/adult/walk/platinum.png
+	- Licenses:
+		- OGA-BY 3.0+
+		- CC-BY 3.0+
+		- GPL 3.0
+	- Authors:
+		- JaidynReiman
+	- Links:
+		- https://opengameart.org/content/lpc-expanded-xlong-hair
+
+hair/extensions/ponytails/topknot_short/adult/walk/violet.png
+	- Licenses:
+		- OGA-BY 3.0+
+		- CC-BY 3.0+
+		- CC-BY-SA 3.0
+		- GPL 3.0
+	- Authors:
+		- JaidynReiman
+	- Links:
+		- https://opengameart.org/content/lpc-1-hairstyle-2-hair-extensions-3-previously-unofficially-released-hairstyles
+
+head/ears/avyon/skin/adult/walk/brown.png
+	- Licenses:
+		- OGA-BY 3.0+
+		- CC-BY 3.0+
+		- GPL 3.0
+	- Authors:
+		- JaidynReiman
+	- Links:
+		- https://opengameart.org/content/lpc-furry-ears-tails-for-rpg-sprites
+
+facial/earrings/princess/male/walk/yellow.png
+	- Licenses:
+		- CC0
+	- Authors:
+		- bluecarrot16
+	- Links:
+		- https://opengameart.org/content/lpc-jewelry
+
+hat/pirate/bandana/skull/adult/walk/gray.png
+	- Note: Original Bandana by Fabzy, Pirate Version by Bluecarrot16, layers and added animations by JaidynReiman
+	- Licenses:
+		- CC-BY-SA 3.0
+	- Authors:
+		- bluecarrot16
+		- Fabzy
+	- Links:
+		- https://opengameart.org/content/the-revolution-hair
+		- https://opengameart.org/content/lpc-pirates
+		- https://opengameart.org/content/lpc-expanded-hats-facial-helmets
+
